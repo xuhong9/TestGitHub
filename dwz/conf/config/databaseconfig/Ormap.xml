@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+  <bean id="com.usion.common.persistence.dto.UsionBerthDto" name="com.usion.common.persistence.pk.UsionBerthPK" class="com.cfcc.jaf.persistence.jaform.config.Ormap" >
+	  <property name="dtoName" value="com.usion.common.persistence.dto.UsionBerthDto"/>
+	  <property name="daoName" value="com.usion.common.persistence.dao.UsionBerthDao"/>
+	  <property name="pkName" value="com.usion.common.persistence.pk.UsionBerthPK"/>
+	  <property name="infoName" value="com.usion.common.persistence.info.UsionBerthInfo"/>
+	  <property name="tableName" value="usion_berth"/>	  
+  </bean>
+
+
+
+</beans>

@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<description> JAF Ormap generator </description>
+	<bean id="NamingConvention" class="com.cfcc.jaf.persistence.dao.NamingConvention">
+		<property name="conventionMock"
+			value="DTO_UNDERLINE_TO_UPPERCASE,COLUMN_IGNORE_UNDERLINE" />
+	</bean>
+	<bean id="mapGenerator.ORM.GEN.ID" class="com.cfcc.jaf.persistence.jaform.MapGenerator">
+		<property name="dtoTypeProcessors">
+			<bean
+				class="com.cfcc.jaf.persistence.jaform.info.type.OrcaleDtoFieldTypeProcessor" />
+		</property>
+		<property name="springVersion" value="2.5" />
+		<property name="dbType" value="DB2" />
+		<property name="databaseTables" ref="unifiedTables" />
+		<property name="tablePattern">
+			<list>		
+				
+				<value>CCTL_CERTDOWN_APPL</value>
+				<!-- 全部表   
+				<value>BASE_DDINFO</value>
+				<value>BASE_DDTYPE</value>
+				
+				<value>ACT_RE_PROCDEF</value>
+				<value>ACT_RU_EXECUTION</value>
+				<value>ACT_RU_TASK</value>
+				<value>BASE_AMOUNTLIMIT</value>
+				<value>BASE_APP_INSTANCE</value>
+				<value>BASE_AUTHRTY</value>
+				<value>BASE_BANKBATCHINDEX</value>
+				<value>BASE_BANKCODE</value>
+				<value>BASE_BANKDETAILINDEX</value>
+				<value>BASE_BANKTYPE</value>
+				<value>BASE_BIZTPCTG_REFER</value>
+				<value>BASE_CCPCCODE</value>
+				<value>BASE_CERTIFICATE</value>
+				<value>BASE_CERTVERIFY</value>
+				<value>BASE_CHANNELSTATUS</value>
+				<value>BASE_CISAGCY</value>
+				<value>BASE_CITYCODE</value>
+				<value>BASE_DTDIC_REFER</value>
+				<value>BASE_EXCEPTMSG</value>
+				<value>BASE_MCACHEINDEX</value>
+				<value>BASE_MSGINDEX</value>				
+				<value>BASE_MSGLOG</value>
+				<value>BASE_MSGTPRUNTIME</value>
+				<value>BASE_MSGTYPE_REFER</value>
+				<value>BASE_NOTPKG_TIME_DETAIL</value>
+				<value>BASE_NPCINDEX</value>
+				<value>BASE_PACKAGE_INFO</value>
+				<value>BASE_PARTY</value>
+				<value>BASE_PKG_RULEPARA</value>
+				<value>BASE_SCHEDULE_ACTJOB</value>
+				<value>BASE_SCHEDULE_JOB</value>
+				<value>BASE_SCHEDULE_JOBLOG</value>
+				<value>BASE_SIGNVERIFY</value>
+				<value>BASE_SYSDATE</value>
+				<value>BASE_SYSPARAM</value>
+				<value>BASE_SYSSTATUS</value>
+				<value>BEPS_ACCTQRY</value>
+				<value>BEPS_ACCTQRY_REPLY</value>
+				<value>BEPS_AUTHDEBT</value>
+				<value>BEPS_BANK_BILL</value>
+				<value>BEPS_BHCDTDBT_APPL</value>
+				<value>BEPS_BHCDTDBT_RTN</value>
+				<value>BEPS_BHCDT_APPL</value>
+				<value>BEPS_BHCDT_DETAIL_APPL</value>
+				<value>BEPS_BHCDT_DETIL_RTN</value>
+				<value>BEPS_BHCDT_RTN</value>
+				<value>BEPS_BHDBT_APPL</value>
+				<value>BEPS_BHDBT_DETAIL_APPL</value>
+				<value>BEPS_BHDBT_DETIL_RTN</value>
+				<value>BEPS_BHDBT_RTN</value>
+				<value>BEPS_BHDETAIL_APPL</value>
+				<value>BEPS_BHDETIL_RTN</value>
+				<value>BEPS_BHQUERY_APPL</value>
+				<value>BEPS_BHQUERY_DETILAPPL</value>
+				<value>BEPS_BHQUERY_DETILREPLY</value>
+				<value>BEPS_BHQUERY_REPLY</value>
+				<value>BEPS_BHREPEAL_APPL</value>
+				<value>BEPS_BHTREATY_APPL</value>
+				<value>BEPS_BHTREATY_DETILAPPL</value>
+				<value>BEPS_BHTREATY_DETILREPLY</value>
+				<value>BEPS_BHTREATY_REPLY</value>
+				<value>BEPS_BIZ_BILL</value>				
+				<value>BEPS_BUSDOWNLOAD_APPL</value>
+				<value>BEPS_BUSDOWNLOAD_APPLDETAIL</value>
+				<value>BEPS_BUSDOWNLOAD_REPL</value>
+				<value>BEPS_CASHIER_CHECK</value>
+				<value>BEPS_CDTDBT_PAY</value>
+				<value>BEPS_CHECKDETAIL</value>
+				<value>BEPS_CHECKDETAILDL_REPL</value>
+				<value>BEPS_CHECKDETAIL_APPL</value>
+				<value>BEPS_CHECKDETAIL_APPLDETAIL</value>
+				<value>BEPS_CHECKDETAIL_LISTDETAIL</value>
+				<value>BEPS_CHECKDETAIL_REPLLIST</value>
+				<value>BEPS_CHECK_RESULT</value>
+				<value>BEPS_CHEQREVS</value>
+				<value>BEPS_CHEQREVS_DETAIL</value>
+				<value>BEPS_CHEQUE</value>
+				<value>BEPS_CHEQUEFF</value>
+				<value>BEPS_CHEQUEFF_REPLY</value>
+				<value>BEPS_CHEQUE_IMAGE</value>
+				<value>BEPS_CIS_RTN</value>
+				<value>BEPS_CIS_RTNDETAIL</value>
+				<value>BEPS_CREDIT_APPL</value>
+				<value>BEPS_CREDIT_DETILAPPL</value>
+				<value>BEPS_CREDIT_DETILRTN</value>
+				<value>BEPS_CREDIT_RTN</value>
+				<value>BEPS_DBT_RTNDETIL</value>
+				<value>BEPS_DBT_STOPAYAPPL</value>
+				<value>BEPS_DEBT_APPL</value>
+				<value>BEPS_DEBT_APPLDETIL</value>
+				<value>BEPS_DEBT_DEPOSIT</value>
+				<value>BEPS_DEBT_RTN</value>
+				<value>BEPS_DEBT_WITHDRAWALS</value>
+				<value>BEPS_DEDUCT_SCOT</value>
+				<value>BEPS_DEPUTY_CONFIRM</value>
+				<value>BEPS_DEPUTY_RJT</value>
+				<value>BEPS_DEPUTY_RTN</value>
+				<value>BEPS_DPUTCDTDBT</value>
+				<value>BEPS_EXCHANGE</value>
+				<value>BEPS_FINANCE_PAYMENT</value>
+				<value>BEPS_FIXDTCREDIT</value>
+				<value>BEPS_FNCPMT_DETAIL</value>
+				<value>BEPS_FUNDEXCH</value>
+				<value>BEPS_FUNDEXCH_DETIL</value>
+				<value>BEPS_FUNDISTRI</value>
+				<value>BEPS_FUNDISTRI_DETIL</value>
+				<value>BEPS_GATHERCHECK</value>
+				<value>BEPS_GATHERCHECK_APPL</value>
+				<value>BEPS_GATHERCHECK_DETAIL</value>
+				<value>BEPS_GATHERCHECK_MSG</value>
+				<value>BEPS_INFOREVS_APPL</value>
+				<value>BEPS_INFOREVS_REPLY</value>
+				<value>BEPS_PAY_INFORM</value>
+				<value>BEPS_PAY_INFORMREPL</value>
+				<value>BEPS_PAY_QUERYAPPL</value>
+				<value>BEPS_PAY_QUERYREPL</value>
+				<value>BEPS_PBCCHECKDETAIL</value>
+				<value>BEPS_PERBUSCHECK</value>
+				<value>BEPS_PREBUSCHCK_LISTDETAIL</value>
+				<value>BEPS_PREBUSCHECK</value>
+				<value>BEPS_PREBUSCHECK_LIST</value>
+				<value>BEPS_PRINTRTN_FLDDTL</value>
+				<value>BEPS_PRINTRTN_GTHRDTL</value>
+				<value>BEPS_PRINT_APPL</value>
+				<value>BEPS_PRINT_RTN</value>
+				<value>BEPS_REEXCHANGE</value>
+				<value>BEPS_REIPTREVS</value>
+				<value>BEPS_REIPTREVS_DETAIL</value>
+				<value>BEPS_REVS_APPL</value>
+				<value>BEPS_REVS_INFORM</value>
+				<value>BEPS_REVS_REPLY</value>
+				<value>BEPS_RTCDTDBT</value>
+				<value>BEPS_RTCDTDBT_RTN</value>
+				<value>BEPS_STOPAY_DETILAPPL</value>
+				<value>BEPS_STOPAY_DETILREPL</value>
+				<value>BEPS_STOPAY_REPLY</value>
+				<value>BIZ_ACCT_BALANCE</value>
+				<value>BIZ_ACTTASK_EXECUTERESULT</value>
+				<value>BIZ_BANKCARD</value>
+				<value>BIZ_BATCH_TASK</value>
+				<value>BIZ_BR_RELATION</value>
+				<value>BIZ_BR_TYPE</value>
+				<value>BIZ_CCY_REFER</value>
+				<value>BIZ_CHANINDEX</value>
+				<value>BIZ_CHANNEL_PARAM</value>
+				<value>BIZ_CHARGE</value>
+				<value>BIZ_CHARGE_DETAIL</value>
+				<value>BIZ_CORECHK_DATA</value>
+				<value>BIZ_CORECHK_EXCEPTION</value>
+				<value>BIZ_CORECHK_RST</value>
+				<value>BIZ_CORECHK_STATUS</value>
+				<value>BIZ_DAYEND_CTRL</value>
+				<value>BIZ_DAYEND_CTRL_SUB</value>
+				<value>BIZ_DAYEND_PARAM</value>
+				<value>BIZ_DAYEND_PARAM_UP</value>
+				<value>BIZ_ERR2RJTCD</value>
+				<value>BIZ_INFORMATION</value>
+				<value>BIZ_INVOICE</value>
+				<value>BIZ_INVOICE_COL</value>
+				<value>BIZ_INVOICE_ITEM</value>
+				<value>BIZ_LCPY_ADDINFO</value>
+				<value>BIZ_LIMIT_PARAM</value>
+				<value>BIZ_MSGINDEX</value>
+				<value>BIZ_OUT_ROUTER</value>
+				<value>BIZ_PARAM_ACC</value>
+				<value>BIZ_PARAM_ACCT_RPLC</value>
+				<value>BIZ_PARAM_ACCT_SET</value>
+				<value>BIZ_PARAM_AGENTBRACC</value>
+				<value>BIZ_PARAM_BRACC</value>
+				<value>BIZ_PARAM_CHK_ACC</value>
+				<value>BIZ_PARAM_CHK_SUBJECT</value>
+				<value>BIZ_PARAM_COMMON</value>
+				<value>BIZ_PARAM_ERRCODE</value>
+				<value>BIZ_PARAM_MSGAUTH</value>
+				<value>BIZ_PARAM_MSGTYPE</value>
+				<value>BIZ_PARAM_PST</value>
+				<value>BIZ_PARAM_ROUTER</value>
+				<value>BIZ_PARAM_STATUS</value>
+				<value>BIZ_PAYACCT</value>
+				<value>BIZ_PAYACCT_ADD</value>
+				<value>BIZ_PAYMENT</value>
+				<value>BIZ_PAYMENT_ADD</value>
+				<value>BIZ_PBCCHK_LIST</value>
+				<value>BIZ_PROC_CHARGE</value>
+				<value>BIZ_PRTC_DEPUTY</value>
+				<value>BIZ_PRTC_PRDDBT</value>
+				<value>BIZ_PRTC_SAVWDR</value>
+				<value>BIZ_PST_APPL</value>
+				<value>BIZ_PST_INFO</value>
+				<value>BIZ_PST_LOG</value>
+				<value>BIZ_PVPSETTLE</value>
+				<value>BIZ_QUERYREPLY</value>
+				<value>BIZ_TASK_PUSH</value>
+				<value>CCTL_AMOUNTLIMITCHNG</value>
+				<value>CCTL_AMOUNTLIMITCHNG_DETAIL</value>
+				<value>CCTL_AUTHRTYCHNG</value>
+				<value>CCTL_AUTHRTYCHNG_DETAIL</value>
+				<value>CCTL_AUTHRTYCHNG_DETAILINFO</value>
+				<value>CCTL_BANKCODECHNG</value>
+				<value>CCTL_BANKCODECHNG_DETAIL</value>
+				<value>CCTL_BASISCHNG</value>
+				<value>CCTL_BASISCHNG_BKTPDETAIL</value>
+				<value>CCTL_BASISCHNG_CCPCDETAIL</value>
+				<value>CCTL_BASISCHNG_CITYDETAIL</value>
+				<value>CCTL_BIZTPCTGMNG</value>
+				<value>CCTL_BIZTPCTGMNG_DETAIL</value>
+				<value>CCTL_CANCELL_REPLY</value>
+				<value>CCTL_CERTCHANGE</value>
+				<value>CCTL_CERTDOWN_APPL</value>
+				<value>CCTL_CERTDOWN_DETAILAPPL</value>
+				<value>CCTL_CERTDOWN_DETAILREPLY</value>
+				<value>CCTL_CERTDOWN_REPLY</value>
+				<value>CCTL_CISAGCYCHNG</value>
+				<value>CCTL_CISAGCYCHNG_DETAIL</value>
+				<value>CCTL_COMMRTN</value>
+				<value>CCTL_COMMSG</value>
+				<value>CCTL_COMMSIGN</value>
+				<value>CCTL_COMMSIGN_REPLY</value>
+				<value>CCTL_CORECHECK</value>
+				<value>CCTL_DEPOSITPBCAMT_DATA</value>
+				<value>CCTL_DROPMSG</value>
+				<value>CCTL_FIND_REQ_MSG</value>
+				<value>CCTL_FIND_RES_DETAIL_MSG</value>
+				<value>CCTL_FIND_RES_MSG</value>
+				<value>CCTL_FREEFORMAT</value>
+				<value>CCTL_LOGIN_APPL</value>
+				<value>CCTL_LOGIN_REPLY</value>
+				<value>CCTL_OFFLINE</value>
+				<value>CCTL_PARTYSTSCHNG</value>
+				<value>CCTL_PARTYSTSCHNG_DETAIL</value>
+				<value>CCTL_PBCCHCKERR</value>
+				<value>CCTL_QUERYAPPL</value>
+				<value>CCTL_QUERYREPLY</value>
+				<value>CCTL_REPEAL_APPL</value>
+				<value>CCTL_REPEAL_DETAILAPPL</value>
+				<value>CCTL_RETURN_APPL</value>
+				<value>CCTL_RETURN_REPLY</value>
+				<value>CCTL_RTN_DETAILAPPL</value>
+				<value>CCTL_RTN_DETAILREPLY</value>
+				<value>CCTL_STSQUERY_APPL</value>
+				<value>CCTL_STSQUERY_REPLY</value>
+				<value>CCTL_SYSPARAMCHNG</value>
+				<value>CCTL_SYSPARAMCHNG_DETAIL</value>
+				<value>CCTL_SYSSTATUSCHNG</value>
+				<value>CCTL_SYSSTOP</value>
+				<value>CCTL_SYSSTOP_DETAIL</value>
+				<value>CCTL_SYSTEMCHECK</value>
+				<value>HVPS_APPLBK_REIPT</value>
+				<value>HVPS_BUSDOWNLOAD_APPL</value>
+				<value>HVPS_BUSDOWNLOAD_DETAILAPPL</value>
+				<value>HVPS_BUSDOWNLOAD_REPL</value>
+				<value>HVPS_CHECKDETAILDL_REPL</value>
+				<value>HVPS_CHECKDETAIL_APPL</value>
+				<value>HVPS_CHECKDETAIL_DETAILAPPL</value>
+				<value>HVPS_CHECKDETAIL_LISTDETAIL</value>
+				<value>HVPS_CHECKDETAIL_REPLLIST</value>
+				<value>HVPS_CHECK_RESULT</value>
+				<value>HVPS_DETAILCHECK</value>
+				<value>HVPS_GATHERCHECK</value>
+				<value>HVPS_GATHERCHECK_APPL</value>
+				<value>HVPS_GATHERCHECK_DETAIL</value>
+				<value>HVPS_GATHERCHECK_MSG</value>
+				<value>HVPS_IMMEDIATE</value>
+				<value>HVPS_IMMEDIATE_BOND</value>
+				<value>HVPS_IMMEDIATE_CUT</value>
+				<value>HVPS_IMMEDIATE_FOREX</value>
+				<value>HVPS_IMMEDIATE_FUND</value>
+				<value>HVPS_IMMEDIATE_LINE</value>
+				<value>HVPS_IMMEDIATE_PAY</value>
+				<value>HVPS_MULTINETAMT_SETTL</value>
+				<value>HVPS_MULTINETAMT_SETTL_DETAIL</value>
+				<value>HVPS_PAYCREDIT</value>
+				<value>HVPS_PAYCREDIT_AUTH</value>
+				<value>HVPS_PAYCREDIT_BANK</value>
+				<value>HVPS_PAYCREDIT_BIZBILL</value>
+				<value>HVPS_PAYCREDIT_CASHIERCHECK</value>
+				<value>HVPS_PAYCREDIT_CBD</value>
+				<value>HVPS_PAYCREDIT_CHQ</value>
+				<value>HVPS_PAYCREDIT_PAY</value>
+				<value>HVPS_PAYCREDIT_REIPT</value>
+				<value>HVPS_PAYCREDIT_RTN</value>
+				<value>HVPS_PBCDETAILCHECK</value>
+				<value>HVPS_PREBUSCHCK_LISTDETAIL</value>
+				<value>HVPS_PREBUSCHECK</value>
+				<value>HVPS_PREBUSCHECK_LIST</value>
+				<value>HVPS_PREBUSCHECK_MSG</value>
+				<value>HVPS_PVP_SETTLEAPPL</value>
+				<value>HVPS_PVP_SETTLEREPLY</value>
+				<value>HVPS_REIPT_APPLRTN</value>
+				<value>HVPS_REIPT_EXCHANGE</value>
+				<value>HVPS_WITHDRAWAL_RTN</value>
+				<value>OPMNG_AREACODE</value>
+				<value>OPMNG_AUTOFUND_CHECK</value>
+				<value>OPMNG_DDINFO</value>
+				<value>OPMNG_DDTYPE</value>
+				<value>OPMNG_MENU</value>
+				<value>OPMNG_ORG</value>
+				<value>OPMNG_RIGHT</value>
+				<value>OPMNG_ROLE</value>
+				<value>OPMNG_ROLERIGHT</value>
+				<value>OPMNG_USER</value>
+				<value>OPMNG_USERPWD_HIS</value>
+				<value>OPMNG_USERRIGHT</value>
+				<value>OPMNG_USERROLE</value>
+				<value>OPMNG_WRNDETAIL</value>
+				<value>OPMNG_WRNMANAGE</value>
+				<value>SIMU_AIMBKCSTM</value>
+				<value>SIMU_AIMBKINFO</value>
+				<value>SIMU_LINEINFO</value>
+				<value>SIMU_NPCSTAT</value>
+				<value>SIMU_RTN_LIST</value>
+				<value>SIMU_STAC</value>
+				<value>SIMU_TEMPLETE</value>
+				<value>SIMU_TSBKINFO</value>
+				<value>STAC_ABSMERGER</value>
+				<value>STAC_ACCTCHARGE</value>
+				<value>STAC_ACCTMAINTAIN</value>
+				<value>STAC_ACCTMAINTIAN</value>
+				<value>STAC_ACCTMANAGE</value>
+				<value>STAC_ACCTQUERY_APPL</value>
+				<value>STAC_ACCTQUERY_DETIL</value>
+				<value>STAC_ACCTQUERY_REPLY</value>
+				<value>STAC_ACCT_BALANCE_WRN</value>
+				<value>STAC_AUTOFUND_APPL</value>
+				<value>STAC_AUTOFUND_DETAIL</value>
+				<value>STAC_AUTOFUND_DETILLST</value>
+				<value>STAC_AUTOFUND_PTC</value>
+				<value>STAC_AUTOFUND_PTC_REC</value>
+				<value>STAC_AUTOFUND_QUERYAPL</value>
+				<value>STAC_AUTOFUND_QUERYRPL</value>
+				<value>STAC_AUTOFUND_REPLY</value>
+				<value>STAC_BALAWRN</value>
+				<value>STAC_BALAWRNAPPL</value>
+				<value>STAC_BEPSNET_STAC</value>
+				<value>STAC_CDTLMT_CUT</value>
+				<value>STAC_DOWNLOAD_DETIL</value>
+				<value>STAC_FEELIST</value>
+				<value>STAC_FEERTNLIST</value>
+				<value>STAC_FUNDPOOL</value>
+				<value>STAC_FUNDPOOL_APPL</value>
+				<value>STAC_FUNDPOOL_BRANCH</value>
+				<value>STAC_LINEMNG_APPL</value>
+				<value>STAC_LINEQUERY_APPL</value>
+				<value>STAC_LINEQUERY_DETIL</value>
+				<value>STAC_LINEQUERY_REPLY</value>
+				<value>STAC_LIQUQUERYCLR_REPL</value>
+				<value>STAC_LIQUQUERYNOCLR_REPL</value>
+				<value>STAC_LIQUQUERY_APPL</value>
+				<value>STAC_LIQUQUERY_REPL</value>
+				<value>STAC_NASTAC</value>
+				<value>STAC_NDCCDTLMT</value>
+				<value>STAC_NDCCDTLMT_CUTFAIL</value>
+				<value>STAC_NDCDIRECT_PLEDGERTN</value>
+				<value>STAC_NDCDISTRI</value>
+				<value>STAC_NDCDISTRI_WRN</value>
+				<value>STAC_NDCFREEZEFUND_APPL</value>
+				<value>STAC_NDCINFORM</value>
+				<value>STAC_NDCPLEDGE_INFORM</value>
+				<value>STAC_NDCPLEDGE_INFORM_DETAIL</value>
+				<value>STAC_NDCQUERY_APPL</value>
+				<value>STAC_NDCQUERY_REPLY</value>
+				<value>STAC_NDCUSABLELMT_WRN</value>
+				<value>STAC_NDCWRN</value>
+				<value>STAC_OCACCTINFOM</value>
+				<value>STAC_OVERDRFTCUT</value>
+				<value>STAC_OVERDRFTCUTLIST</value>
+				<value>STAC_PLEDGEMODE</value>
+				<value>STAC_RAISE_FUNDS</value>
+				<value>STAC_RPTDOWNLOAD</value>
+				<value>STAC_SETTLEACCT_RTN</value>
+				<value>STAC_TREATYSTSINFOM</value>
+				<value>STAC_TXNETGLINE_DETIL</value>
+				<value>STAC_TXNETGLINE_MNGAPL</value>
+				<value>STAC_TXNETGLINE_QRYAPL</value>
+				<value>STAC_TXNETGLINE_REPLY</value>
+				  -->   
+				
+ 			</list>
+
+		</property>
+
+		<!--<property name="tableSchema" value="SIMU" />-->
+		<property name="tableSchema" value="NAPS" />
+		
+
+		<!--
+			==== time stamps && change number=====================
+		-->
+
+		<!-- java -->
+
+		<property name="columnModifyNumber" value="I_CHGNUM" />
+		<property name="columnCreateTimeStamp" value="CREATETIME" />
+		<property name="columnUpdateTimeStamp" value="UPDATETIME" />
+		<property name="columnChecked" value="UPDATETIME" />
+
+		<!-- upp java dto-->
+		<property name="outputPathDao"
+			value="D:/workspace/Cnaps2/trunk/Cnaps2DbPersistence/src" />
+		<property name="outputPathPk"
+			value="D:/workspace/Cnaps2/trunk/Cnaps2DbPersistence/src" />
+		<property name="outputPathDto"
+			value="D:/workspace/Cnaps2/trunk/Cnaps2DbPersistence/src" />
+		<property name="outputPathInfo"
+			value="D:/workspace/Cnaps2/trunk/Cnaps2DbPersistence/src" />
+		<property name="outputPathXml"
+			value="D:/workspace/Cnaps2/trunk/Cnaps2DbPersistence/conf/config/databaseconfig/Ormap2.xml" />
+
+		
+		<property name="packageDao" value="com.cfcc.cnaps2.common.persistence.dao" />
+		<property name="packagePk" value="com.cfcc.cnaps2.common.persistence.pk" />
+		<property name="packageDto" value="com.cfcc.cnaps2.common.persistence.dto" />
+		<property name="packageInfo" value="com.cfcc.cnaps2.common.persistence.info" />
+
+
+		<!--============================   ============================-->
+		<!--
+			<property name="vmDao"
+			value="com/cfcc/jaf/persistence/jaform/vm/dao2.0.vm" />
+		-->
+		<property name="vmDao" value="com/cfcc/cnaps2/vm/dao2.0.vm" />
+		<property name="vmPk" value="com/cfcc/cnaps2/vm/pk2.0.vm" />
+		<property name="vmDto" value="com/cfcc/cnaps2/vm/dto2.0.vm" />
+		<property name="vmInfo"
+			value="com/cfcc/jaf/persistence/jaform/vm/tableinfo.vm" />
+		<property name="vmOrmapxml" value="com/cfcc/jaf/persistence/jaform/vm/xml.vm" />
+		<property name="suffixDao" value="Dao" />
+		<property name="suffixPk" value="PK" />
+		<property name="suffixDto" value="Dto" />
+		<property name="suffixInfo" value="Info" />
+	</bean>
+
+	<!--==================== ============================-->
+
+	<!--================= ====================-->
+	<bean id="unifiedTables"
+		class="com.cfcc.jaf.persistence.jaform.db.unified.UnifiedTables">
+		<property name="dataSource" ref="jafDataSource" />
+	</bean>
+	<bean id="mySQLExecutorFactory" class="com.cfcc.jaf.persistence.jdbc.sql.SQLExecutorFactory">
+		<property name="dataSource" ref="jafDataSource" />
+		<property name="databaseType" value="DB2" />
+		<property name="maxRows" value="10000" />
+		<property name="exceedRowLimitStrategy" value="ignore" />
+		<property name="statistics" value="true" />
+	</bean>
+
+	<!--=================== ===============-->
+	<bean id="jafDataSource" class="com.cfcc.jaf.persistence.jdbc.core.JAFDataSource">
+		<property name="containDataSource" ref="apacheDataSource" />
+		<property name="containerTransaction">
+			<value>false</value>
+		</property>
+	</bean>
+	<bean id="apacheDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="com.ibm.db2.jcc.DB2Driver" />
+		<property name="url" value="jdbc:db2://197.1.5.99:60000/cnaps2db" />
+		<property name="username" value="naps" />
+		<property name="password" value="cmbc1234" />
+
+	</bean>
+	
+	<!--=================== SQL Executor ======= -->
+	<bean id="SQLExecutorFactory.GLOBAL.ID" class="com.cfcc.jaf.persistence.jdbc.sql.SQLExecutorFactory">
+		<property name="dataSource" ref="jafDataSource" />
+		<property name="databaseType" value="DB2" />
+		<property name="maxRows" value="10000" />
+		<property name="exceedRowLimitStrategy" value="ignore" />
+		<property name="statistics" value="true" />
+	</bean>
+</beans>

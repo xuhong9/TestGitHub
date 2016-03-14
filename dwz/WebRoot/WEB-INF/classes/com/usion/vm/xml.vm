@@ -1,0 +1,9 @@
+  <bean id="${dtoPkg}.${dtoInfo.dtoName}${orm_suffix_dto}" name="${pkPkg}.${dtoInfo.dtoName}${orm_suffix_pk}" class="com.cfcc.jaf.persistence.jaform.config.Ormap" >
+	  <property name="dtoName" value="${dtoPkg}.${dtoInfo.dtoName}${orm_suffix_dto}"/>
+	  <property name="daoName" value="${daoPkg}.${dtoInfo.dtoName}${orm_suffix_dao}"/>
+	  <property name="pkName" value="${pkPkg}.${dtoInfo.dtoName}${orm_suffix_pk}"/>
+	  <property name="infoName" value="${infoPkg}.${dtoInfo.dtoName}${orm_suffix_info}"/>
+	  <property name="tableName" value="${dtoInfo.tableInfo.tablename}"/>	  
+  </bean>
+
+

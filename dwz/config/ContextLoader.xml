@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="GB2312"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<bean id="applicationContextLoader"
+		class="com.cfcc.jaf.core.loader.ApplicationContextLoader">
+		<property name="fileList">
+			<list>
+				<value>config/common/Ormap.xml</value>
+				<value>config/common/DatabaseConfig.xml</value>
+			</list>
+		</property>
+	</bean>
+</beans>

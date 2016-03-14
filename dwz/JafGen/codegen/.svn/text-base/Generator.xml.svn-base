@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<description> JAF Ormap generator </description>
+	<bean id="NamingConvention" class="com.cfcc.jaf.persistence.dao.NamingConvention">
+		<property name="conventionMock"
+			value="DTO_UNDERLINE_TO_UPPERCASE,COLUMN_IGNORE_UNDERLINE" />
+	</bean>
+	<bean id="mapGenerator.ORM.GEN.ID" class="com.cfcc.jaf.persistence.jaform.MapGenerator">
+		<property name="dtoTypeProcessors">
+			<bean
+				class="com.cfcc.jaf.persistence.jaform.info.type.OrcaleDtoFieldTypeProcessor" />
+		</property>
+		<property name="springVersion" value="2.5" />
+		<property name="dbType" value="ORACLE" />
+		<property name="databaseTables" ref="unifiedTables" />
+		<property name="tablePattern">
+			<list>
+	 	 <value>BIZ_BR_RELATION</value>
+			</list>
+
+		</property>
+
+		<property name="tableSchema" value="CNAPS2" />
+
+		<!--
+			==== time stamps && change number=====================
+		-->
+
+
+		<!-- java -->
+
+		<property name="columnModifyNumber" value="I_CHGNUM" />
+		<property name="columnCreateTimeStamp" value="CREATETIME" />
+		<property name="columnUpdateTimeStamp" value="UPDATETIME" />
+		<property name="columnChecked" value="UPDATETIME" />
+
+		<!-- upp java dto-->
+		<property name="outputPathDao"
+			value="D:/workspase/Cnaps2-cmbc/Cnaps2DbPersistence/src/" />
+		<property name="outputPathPk"
+			value="D:/workspase/Cnaps2-cmbc/Cnaps2DbPersistence/src/" />
+		<property name="outputPathDto"
+			value="D:/workspase/Cnaps2-cmbc/Cnaps2DbPersistence/src/" />
+		<property name="outputPathInfo"
+			value="D:/workspase/Cnaps2-cmbc/Cnaps2DbPersistence/src/" />
+		<property name="outputPathXml"
+			value="D:/workspase/Cnaps2-cmbc/Cnaps2DbPersistence/conf/config/databaseconfig/Ormap.xml" />
+
+		<property name="packageDao" value="com.cfcc.cnaps2.common.persistence.dao" />
+		<property name="packagePk" value="com.cfcc.cnaps2.common.persistence.pk" />
+		<property name="packageDto" value="com.cfcc.cnaps2.common.persistence.dto" />
+		<property name="packageInfo" value="com.cfcc.cnaps2.common.persistence.info" />
+
+
+		<!--============================   ============================-->
+		<!--
+			<property name="vmDao"
+			value="com/cfcc/jaf/persistence/jaform/vm/dao2.0.vm" />
+		-->
+		<property name="vmDao" value="com/cfcc/cnaps2/vm/dao2.0.vm" />
+		<property name="vmPk" value="com/cfcc/jaf/persistence/jaform/vm/pk.vm" />
+		<property name="vmDto" value="com/cfcc/cnaps2/vm/dto2.0.vm" />
+		<property name="vmInfo"
+			value="com/cfcc/jaf/persistence/jaform/vm/tableinfo.vm" />
+		<property name="vmOrmapxml" value="com/cfcc/jaf/persistence/jaform/vm/xml.vm" />
+		<property name="suffixDao" value="Dao" />
+		<property name="suffixPk" value="PK" />
+		<property name="suffixDto" value="Dto" />
+		<property name="suffixInfo" value="Info" />
+	</bean>
+
+	<!--==================== ============================-->
+	<!--
+		<property name="parentChildrenRels"> <bean
+		class="com.cfcc.jaf.persistence.jaform.info.ParentChildrenRefs"
+		init-method="init"> <property name="refs"> <list>
+		************Start**************** <bean
+		class="com.cfcc.jaf.persistence.jaform.info.ReferenceInfo"> <property
+		name="parentTableName" value="TRL_PKG001COME_RCV_MAIN" /> <property
+		name="childTableName" value="TRL_PKG001COME_RCV_DETAIL" /> <property
+		name="keys" value="i_PkgSrlNo" /> </bean> </list> </property> </bean>
+		</property>
+	-->
+
+	<!--================= ====================-->
+	<bean id="unifiedTables"
+		class="com.cfcc.jaf.persistence.jaform.db.unified.UnifiedTables">
+		<property name="dataSource" ref="jafDataSource" />
+	</bean>
+	<bean id="mySQLExecutorFactory" class="com.cfcc.jaf.persistence.jdbc.sql.SQLExecutorFactory">
+		<property name="dataSource" ref="jafDataSource" />
+		<property name="databaseType" value="ORACLE" />
+		<property name="maxRows" value="10000" />
+		<property name="exceedRowLimitStrategy" value="ignore" />
+		<property name="statistics" value="true" />
+	</bean>
+
+	<!--=================== ===============-->
+	<bean id="jafDataSource" class="com.cfcc.jaf.persistence.jdbc.core.JAFDataSource">
+		<property name="containDataSource" ref="apacheDataSource" />
+		<property name="containerTransaction">
+			<value>false</value>
+		</property>
+	</bean>
+<bean id="apacheDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+<!-- 
+		<property name="url" value="jdbc:oracle:thin:@10.1.2.19:1521/cnaps2" />
+		<property name="username" value="cnaps2" />
+		<property name="password" value="cnaps2" />
+ -->	
+ 		<property name="url" value="jdbc:db2://195.204.88.3:60000/cnaps2db" />
+		<property name="username" value="edzfusr" /> <property name="password"	value="edzfusr" />
+		
+	</bean>
+
+	<!--=================== SQL Executor ======= -->
+	<bean id="SQLExecutorFactory.GLOBAL.ID" class="com.cfcc.jaf.persistence.jdbc.sql.SQLExecutorFactory">
+		<property name="dataSource" ref="jafDataSource" />
+		<property name="databaseType" value="ORACLE" />
+		<property name="maxRows" value="10000" />
+		<property name="exceedRowLimitStrategy" value="ignore" />
+		<property name="statistics" value="true" />
+	</bean>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="GBK"?>
+<jardesc>
+<jar path="Runtime/lib/user/dto.jar"/>
+<options buildIfNeeded="true" compress="true" descriptionLocation="/EBPSBuilder/src/dto.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+<storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+<selectedProjects/>
+<manifest generateManifest="true" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+<sealing sealJar="false">
+<packagesToSeal/>
+<packagesToUnSeal/>
+</sealing>
+</manifest>
+<selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
+<file path="/EBPSBuilder/src/dto.jardesc"/>
+<javaElement handleIdentifier="=EBPSBuilder/src&lt;com.cfcc.ebps.common.persistence.dto"/>
+<javaElement handleIdentifier="=EBPSBuilder/src&lt;com.cfcc.ebps.common.persistence.dao"/>
+<javaElement handleIdentifier="=EBPSBuilder/src&lt;com.cfcc.ebps.common.persistence.info"/>
+<javaElement handleIdentifier="=EBPSBuilder/src&lt;com.cfcc.ebps.common.persistence.pk"/>
+<javaElement handleIdentifier="=EBPSBuilder/src&lt;config.databaseconfig"/>
+</selectedElements>
+<fatjar builder="org.eclipse.jdt.ui.plain_jar_builder" launchConfig=""/>
+</jardesc>

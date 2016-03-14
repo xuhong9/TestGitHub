@@ -1,0 +1,46 @@
+package codegen;
+
+import org.apache.log4j.BasicConfigurator;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.cfcc.jaf.persistence.jaform.MapGenerator;
+
+public class OrmapGeneratetest {
+	public static void main(String[] args) {	
+		genDto();
+
+	}
+
+	private static void genDto() {
+		BasicConfigurator.configure();
+		try {
+			long lBegin = System.currentTimeMillis();
+			ClassPathXmlApplicationContext context=null;
+			String datatype="DB2";
+			if("ORACLE".equals(datatype))
+			{
+				context = new ClassPathXmlApplicationContext(
+				"codegen/Generator.xml");
+			}else
+			{
+				context = new ClassPathXmlApplicationContext(
+				"codegen/Generator-db2.xml");
+			}
+			
+					
+			MapGenerator generator = (MapGenerator) context
+					.getBean("mapGenerator.ORM.GEN.ID");
+			System.out.println("Dto������У����Ե�......");
+			generator.init();
+			generator.generate();
+			
+			long lEnd = System.currentTimeMillis();
+
+			System.out.println("Process is OK,The Whole time="
+					+ (lEnd - lBegin)/1000 + "s");
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}

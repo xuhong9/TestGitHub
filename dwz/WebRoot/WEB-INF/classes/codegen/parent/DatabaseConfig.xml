@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+		http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd
+		http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<bean id="Database.Facade.Db.USION_COMPANION" class="codegen.parent.DatabaseFacade">
+		<property name="ormTemplate" ref="ormTemplate.DB.FRTDB" />
+		<property name="sqlExecutorFactory" ref="SQLExecutorFactory.DB.FRTDB" />
+	</bean>
+	<!-- 
+		=========================业务受理系统数据库相关配置 ===========================
+	-->
+	<!--========================= ODB   Begin=========================-->
+	<bean id="ormTemplate.DB.FRTDB" class="codegen.parent.IbeanOrmTemplate">
+		<property name="dataSource" ref="JAFDataSource.DB.FRTDB" />
+		<!--<property name="databaseType" value="${db.type}"/> 
+		--><property name="databaseType" value="ORACLE"/> 
+ 
+		<property name="statistics">
+			<value>true</value>
+		</property>
+		<property name="maxRows" value="10000" />
+		<property name="exceedRowLimitStrategy" value="ignore" />
+	</bean>
+
+	<!-- SQLExecutor 相关配置  -->
+	<bean id="SQLExecutorFactory.DB.FRTDB" class="com.cfcc.jaf.persistence.jdbc.sql.SQLExecutorFactory">
+		<property name="dataSource" ref="JAFDataSource.DB.FRTDB" />
+		<!--<property name="databaseType" value="${db.type}"/> 
+		--><property name="databaseType" value="ORACLE"/> 
+		<property name="maxRows" value="10000" />
+		<property name="exceedRowLimitStrategy" value="ignore" />
+		<property name="statistics" value="true" /> 
+		<property name="resultSetPositionStrategyName" value="RESULTSET_POSITION_JDBC_CONVENTION" /> 		
+	</bean><!--
+  
+	<bean id="Common.Facade.Db.FRTDB" class="com.cfcc.upp.facade.CommonFacade">
+		<property name="numPage" value="30" />
+		<property name="dbName" value="FRTDB" />
+	</bean>
+	
+	--><bean id="NamingConvention" class="com.cfcc.jaf.persistence.dao.NamingConvention">
+		<property name="conventionMock"
+			value="DTO_UNDERLINE_TO_UPPERCASE,COLUMN_IGNORE_UNDERLINE" />
+	</bean> 
+<bean id="JAFDataSource.DB.FRTDB" class="com.cfcc.jaf.persistence.jdbc.core.JAFDataSource">
+		<property name="containDataSource" ref="DataSource.DB.ODB" />
+		<property name="containerTransaction">
+			<value>false</value>
+		</property>
+	</bean> 
+	
+	<bean id="DataSource.DB.ODB" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="org.gjt.mm.mysql.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/usion_companion?useUnicode=true" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
+				
+   		<property name="initialSize" value="10" />
+        <property name="maxActive" value="100" />
+        <property name="maxIdle" value="10" />
+        <property name="minIdle" value="5" />
+        <property name="logAbandoned" value="true" />
+        <property name="removeAbandoned" value="true" />
+        <property name="removeAbandonedTimeout" value="1000" />
+        <property name="maxWait" value="5000" /> 
+        <property name="testOnBorrow" value="true"/> 
+        <property name="testWhileIdle" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="5000"/>
+        <property name="numTestsPerEvictionRun" value="5"/>    
+        <property name="validationQuery" value="select count(*) from test"></property>
+	</bean>  
+	
+	<bean id="SpringTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="DataSource.DB.ODB" />
+	</bean>
+	
+<bean id="SpringTransactionDefinition" class="org.springframework.transaction.support.DefaultTransactionDefinition">
+	<property name="propagationBehaviorName" value="PROPAGATION_REQUIRES_NEW"/>
+	 
+</bean>
+
+</beans>

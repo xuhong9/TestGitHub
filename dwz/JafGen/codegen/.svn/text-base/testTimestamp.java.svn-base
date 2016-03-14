@@ -1,0 +1,379 @@
+package codegen;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+
+public class testTimestamp {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+//		Date date1 = new Date();
+//		System.out.println(date1);
+//		Timestamp beforTime = new Timestamp(date1.getTime());
+//
+//		System.out.println(beforTime);
+//
+//		String s = beforTime.toString().substring(0,10);
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date date = null;
+//		try {
+//			date = sdf.parse(s);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		Calendar cal=Calendar.getInstance();
+//		cal.setTime(date);
+//		cal.set(Calendar.HOUR, 23);
+//		cal.set(Calendar.MINUTE, 59);
+//		cal.set(Calendar.SECOND, 59);
+//		cal.set(Calendar.MILLISECOND, 999);
+//		date=cal.getTime();
+//		Timestamp beforTime1 = new Timestamp(date.getTime());
+//		System.out.println(beforTime1);
+
+//		testTimestamp a = new testTimestamp();
+//		a.getFile();
+//		BigDecimal d = new BigDecimal(0.00);
+//		String s = d.toString();
+//	    System.out.println(s.substring(0,s.indexOf(".")));
+//	    DecimalFormat format = new DecimalFormat("#0.00");
+//	    format.format(null);
+//	    System.out.println(s);
+//	    System.out.println( format.format(d));
+//	    System.out.println(String.valueOf(d));
+//		System.out.println("2010-02-13".compareTo("2010-02-12"));
+//		a.getOrgInsertSql();
+//		System.out.println("0100"+"0"+(4%2+1));
+//		try {
+//			HttpServletRequest request = null;
+//			Map paraMap = request.getParameterMap();
+//			for (Iterator it = paraMap.keySet().iterator(); it.hasNext();) {
+//				String paraName = (String) it.next();
+//				if (paraName.startsWith("dto.")) {
+//					String dtoClassName = request.getParameter("dtoClassName");// ����Ҫ���Ǵ����������ȫ�޶���
+//					Class clazz = Class.forName(dtoClassName);
+//					// ����ʵ��
+//					Object o = clazz.newInstance();
+//					String firstUpperCase = paraName.substring(0, 1)
+//							.toUpperCase()
+//							+ paraName.substring(1, paraName.length());
+//					String getterMethodName = "get" + firstUpperCase;
+//					String setterMethodName = "set" + firstUpperCase;
+//					Method getterMethod = clazz.getMethod(getterMethodName,
+//							null);
+//					Class fieldClazz = getterMethod.getReturnType();
+//					if (String.class.isAssignableFrom(fieldClazz)) {
+//						clazz.getMethod(setterMethodName, String.class).invoke(
+//								o, paraMap.get(paraName));
+//					} else if (Timestamp.class.isAssignableFrom(fieldClazz)) {
+//					} else if (BigDecimal.class.isAssignableFrom(fieldClazz)) {
+//					}
+//				}
+//			}
+//		} catch (Exception e) {
+//
+//		}
+//		try {
+//			String afterTime = "2010-10-13";
+//			Timestamp beforTime = null;
+//			Date date = null;
+//			if (10 == 10) {
+//				String s = afterTime.substring(0, 10);
+//				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//				date = sdf.parse(s);
+//			}
+//			if(null != date){
+//				beforTime = new Timestamp(date.getTime());
+//			}
+//
+//			System.out.println(beforTime.toString());
+//		} catch (Exception e) {
+//		}
+//		Timestamp beforTime = new Timestamp(System.currentTimeMillis());
+//		System.out.println(beforTime.toString().substring(0,10));
+//		BigDecimal seqNo = new BigDecimal(0);
+//		BigDecimal seqNo1 = seqNo.add(BigDecimal.ONE);
+//		BigDecimal seqNo2 = new BigDecimal(1.01);
+//		System.out.println("seqNo:"+seqNo+"  :  seqNo1:"+seqNo1+"  :  seqNo2:"+seqNo2+"  : BigDecimal.ONE:"+BigDecimal.ONE);
+		
+//		try {
+//			testTimestamp.readConfXml("D:\\zhanglltest_sql.xml");
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		BigDecimal b = new BigDecimal(3);
+		Long l = new Long(3);
+		Long a = l+1;
+		
+	}
+	
+	
+
+	public static List readConfXml(String fileName) throws Exception{
+		InputStream is = testTimestamp.class.getResourceAsStream(fileName);
+		if(null == is){
+			throw new Exception("需解析文件"+fileName+"不存在！");
+		}
+		List colums = new ArrayList();
+		List atrbs = new ArrayList();
+		try {
+			SAXReader reader = new SAXReader();
+			Document document = reader.read(is);// 读取XML文件
+			Element root = document.getRootElement();// 得到根节点
+
+			for (Iterator i = root.elementIterator(); i.hasNext();) {
+				Element ele = (Element) i.next();
+			}
+		} catch (DocumentException e) {
+			throw new Exception("解析文件出错！", e);
+		}
+		List elements = new ArrayList();
+		elements.add(colums);
+		elements.add(atrbs);
+		return elements;
+	}
+	
+	private String getFile(){
+//		File f = new File("D:\\file_right.txt");
+		File f = new File("D:\\right1.txt");
+		String fileContent = "";
+		InputStreamReader read = null;
+		BufferedReader reader = null;
+		try {
+			if (f.isFile() && f.exists()) {
+				read = new InputStreamReader(new FileInputStream(f), "GBK");
+				reader = new BufferedReader(read);
+				String line = "";
+				int i = 1;
+				while ((line = reader.readLine()) != null) {
+//					String str = "insert into TBL_MRIGHT(RIGHTCODE,RIGHTNAME,RMKINFO,RIGHTSORT,STOPFLAG,STATUSUPTIME) values('"
+//							+ line + "',''," + i + ",'1',current timestamp);"+"\n";
+					String str = "insert into TBL_MROLERIGHT(RIGHTCODE,ROLECODE,STATUS) values('"+line+"','1','1');"+"\n";
+					fileContent += str;
+					i++;
+				}
+			}
+			System.out.println(fileContent);
+		} catch (Exception e) {
+			System.out.println("读取文件内容操作出错");
+			e.printStackTrace();
+		}finally{
+			if(null != reader){
+				try{
+					reader.close();
+				}catch(Exception e1){
+					
+				}
+			}
+			if(null != read){
+				try{
+					read.close();
+				}catch(Exception e2){
+					
+				}
+			}
+		}
+		return fileContent;
+	}
+	
+	private String getTableFile(){
+//		File f = new File("D:\\file_right.txt");
+		File f = new File("D:\\zhanglltest.txt");
+		String fileContent = "";
+		InputStreamReader read = null;
+		BufferedReader reader = null;
+		try {
+			if (f.isFile() && f.exists()) {
+				read = new InputStreamReader(new FileInputStream(f), "GBK");
+				reader = new BufferedReader(read);
+				String line = "";
+				int i = 1;
+				while ((line = reader.readLine()) != null) {
+//					String str = "insert into TBL_MRIGHT(RIGHTCODE,RIGHTNAME,RMKINFO,RIGHTSORT,STOPFLAG,STATUSUPTIME) values('"
+//							+ line + "',''," + i + ",'1',current timestamp);"+"\n";
+					String str = "<value>"+line+"</value>"+"\n";
+					fileContent += str;
+					i++;
+				}
+			}
+			System.out.println(fileContent);
+		} catch (Exception e) {
+			System.out.println("读取文件内容操作出错");
+			e.printStackTrace();
+		}finally{
+			if(null != reader){
+				try{
+					reader.close();
+				}catch(Exception e1){
+					
+				}
+			}
+			if(null != read){
+				try{
+					read.close();
+				}catch(Exception e2){
+					
+				}
+			}
+		}
+		return fileContent;
+	}
+	
+	private String getOrgInsertSql(){
+//		File f = new File("D:\\file_right.txt");
+		File f = new File("D:\\create-org.sql");
+		String fileContent = "";
+		InputStreamReader read = null;
+		BufferedReader reader = null;
+		try {
+			if (f.isFile() && f.exists()) {
+				read = new InputStreamReader(new FileInputStream(f), "UTF-8");
+				reader = new BufferedReader(read);
+				String line = "";
+				int i = 1;
+				while ((line = reader.readLine()) != null) {
+					String str = "insert into TBL_MORG_TMP(ORGSEQID, ORGNAME, ORGCODE, UPORGCODE, ORGTYPE, AREACODE, ORGSTS, RMKINFO,UPORGSEQID) values ("
+							+i+",'"+ line + "','2','',0);"+"\n";
+
+					fileContent += str;
+					i++;
+				}
+			}
+			System.out.println(fileContent);
+			FileWriter writer = new FileWriter("D:\\create-org11.sql");
+			BufferedWriter bw = new BufferedWriter(writer);
+			bw.write(fileContent);
+			bw.flush();
+			bw.close();
+			writer.close();
+		} catch (Exception e) {
+			System.out.println("读取文件内容操作出错");
+			e.printStackTrace();
+		}finally{
+			if(null != reader){
+				try{
+					reader.close();
+				}catch(Exception e1){
+					
+				}
+			}
+			if(null != read){
+				try{
+					read.close();
+				}catch(Exception e2){
+					
+				}
+			}
+		}
+		return fileContent;
+	}
+	private String getUserInsertSql(){
+//		File f = new File("D:\\file_right.txt");
+		File f = new File("D:\\creat-user.sql");
+		String fileContent = "";
+		InputStreamReader read = null;
+		BufferedReader reader = null;
+		try {
+			if (f.isFile() && f.exists()) {
+				read = new InputStreamReader(new FileInputStream(f), "UTF-8");
+				reader = new BufferedReader(read);
+				String line = "";
+				int i = 2;
+				while ((line = reader.readLine()) != null) {
+					String str = "insert into TBL_MUSER (USERSEQID, ORGSEQID, USERCODE, GENDER, USERPWD,USERTYPE,PWDLIMIT, PWDMODDATE, ERRTIMES, RECORDSTS, USERSTS, CREATUS, CREATEDT,LMUSERSEQID) values ("
+							+i+","+ line + "0"+(i%2+1)+"','2','96J0TlUbNWtwPI9hLCn0pg==','1',180,CURRENT TIMESTAMP,0,'2','0','admin',CURRENT TIMESTAMP,1);"+"\n";
+
+					fileContent += str;
+					i++;
+					String str1 = "insert into TBL_MUSER (USERSEQID, ORGSEQID, USERCODE, GENDER, USERPWD,USERTYPE,PWDLIMIT, PWDMODDATE, ERRTIMES, RECORDSTS, USERSTS, CREATUS, CREATEDT,LMUSERSEQID) values ("
+						+i+","+ line + "0"+(i%2+1)+"','2','96J0TlUbNWtwPI9hLCn0pg==','1',180,CURRENT TIMESTAMP,0,'2','0','admin',CURRENT TIMESTAMP,1);"+"\n";
+					fileContent += str1;
+					i++;
+				}
+			}
+			System.out.println(fileContent);
+		} catch (Exception e) {
+			System.out.println("读取文件内容操作出错");
+			e.printStackTrace();
+		}finally{
+			if(null != reader){
+				try{
+					reader.close();
+				}catch(Exception e1){
+					
+				}
+			}
+			if(null != read){
+				try{
+					read.close();
+				}catch(Exception e2){
+					
+				}
+			}
+		}
+		return fileContent;
+	}
+	
+	private String getUserRightInsertSql(){
+//		File f = new File("D:\\file_right.txt");
+		File f = new File("D:\\creat-userright2.sql");
+		String fileContent = "";
+		InputStreamReader read = null;
+		BufferedReader reader = null;
+		try {
+			if (f.isFile() && f.exists()) {
+				read = new InputStreamReader(new FileInputStream(f), "UTF-8");
+				reader = new BufferedReader(read);
+				String line = "";
+				while ((line = reader.readLine()) != null) {
+						
+					for(int i = 2;i<=87;i++){
+						String str = "insert into IBPS.TBL_MUSERRIGHT (USERSEQID, RIGHTCODE) values ("
+								+i+",'"+ line + "');"+"\n";
+
+						fileContent += str;
+						
+					}
+				}
+			}
+			System.out.println(fileContent);
+		} catch (Exception e) {
+			System.out.println("读取文件内容操作出错");
+			e.printStackTrace();
+		}finally{
+			if(null != reader){
+				try{
+					reader.close();
+				}catch(Exception e1){
+					
+				}
+			}
+			if(null != read){
+				try{
+					read.close();
+				}catch(Exception e2){
+					
+				}
+			}
+		}
+		return fileContent;
+	}
+
+}

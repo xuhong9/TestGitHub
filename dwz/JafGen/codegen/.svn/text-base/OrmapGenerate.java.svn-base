@@ -1,0 +1,54 @@
+package codegen;
+
+import java.io.File;
+import org.apache.log4j.BasicConfigurator;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import com.cfcc.jaf.persistence.jaform.MapGenerator;
+
+/**
+ * @author caihf
+ * 
+ *
+ */
+public class OrmapGenerate {
+	/**
+	 * commons Logger for this class
+	 */
+
+	public static void main(String[] args) {
+		//String fileType = "Oracle";
+		String fileType = "DB2";
+		String fileDir = "codegen/Generator.xml";
+		
+		if("DB2".equals(fileType)){
+			fileDir = "codegen/Generator-db2.xml";
+		}else if("Oracle".equals(fileType)){
+			fileDir = "codegen/Generator-ora.xml";
+		}
+		genDto(fileDir);
+
+	}
+
+	private static void genDto(String fileDir) {
+		BasicConfigurator.configure();
+		try {
+			long lBegin = System.currentTimeMillis();
+			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(fileDir);
+					
+			MapGenerator generator = (MapGenerator) context
+					.getBean("mapGenerator.ORM.GEN.ID");
+			System.out.println("Dto在生成中，请稍等......");
+			generator.init();
+			generator.setEncode("UTF-8");
+			generator.generate();
+			
+			long lEnd = System.currentTimeMillis();
+
+			System.out.println("Process is OK,The Whole time="
+					+ (lEnd - lBegin)/1000 + "s");
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+}
